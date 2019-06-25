@@ -1,0 +1,36 @@
+= files-checksum-json
+
+Generates a JSON output of the checksums for a given list of files. 
+
+== Overview
+Reads input from `stdin` and prints the resulting JSON
+to `stdout`. The checksums are SHA-256 hashes. If a file does not exist, an entry is created for that file path in the JSON,
+except with the checksum set to `null`.
+
+== Prerequisites
+
+* Python 3
+
+== Usage
+
+```
+<comma-delimited-list-of-files> | python3 files_checksum_json.py
+```
+
+=== Example 1 (Single file, specified manually)
+
+```bash
+echo "someFile.txt" | python3 files_checksum_json.py
+```
+
+=== Example 2 (Multiple files, specified manually)
+
+```bash
+echo "someFile.txt,anotherFile.txt" | python3 files_checksum_json.py
+```
+
+=== Example 3 (Multiple files via `find`)
+
+```bash
+find . -type f -name "*.txt" | tr '\n' ',' | python3 files_checksum_json.py
+```
